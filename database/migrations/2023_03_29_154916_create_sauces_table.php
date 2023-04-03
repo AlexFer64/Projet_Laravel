@@ -15,7 +15,23 @@ class CreateSaucesTable extends Migration
     {
         Schema::create('sauces', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id');
+            $table->string('name');
+            $table->string('manufacturer');
+            $table->text('description');
+            $table->string('main_pepper');
+            $table->string('image_url');
+            $table->integer('heat');
+            $table->integer('likes')->default(0);
+            $table->integer('dislikes')->default(0);
+            $table->string('users_liked')->nullable();
+            $table->string('users_disliked')->nullable();
             $table->timestamps();
+            
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users')
+                  ->onDelete('cascade');
         });
     }
 
