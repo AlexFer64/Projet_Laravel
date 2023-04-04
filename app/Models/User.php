@@ -41,4 +41,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function sauces()
+    {
+        return $this->hasMany(Sauce::class);
+    }
+
+    public function likedSauces()
+    {
+        return $this->belongsToMany(Sauce::class, 'sauce_likes', 'user_id', 'sauce_id');
+    }
+
+    public function dislikedSauces()
+    {
+        return $this->belongsToMany(Sauce::class, 'sauce_dislikes', 'user_id', 'sauce_id');
+    }
 }

@@ -9,18 +9,20 @@ class Sauce extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['userId', 'name', 'manufacturer', 'description', 'mainPepper', 'imageUrl', 'heat', 'likes', 'dislikes', 'usersLiked', 'usersDisliked'];
+    protected $fillable = ['userId', 'name', 'manufacturer', 'description', 'mainPepper', 'imageUrl', 'heat', 'likes', 'dislikes'];
 
     public function user()
-        {
-        return $this->belongsTo('App\User');
-        }
-
-    public function like(){
-        return $this->belongsToMany('App\User');
+    {
+        return $this->belongsTo(User::class);
     }
 
-    public function dislike(){
-        return $this->belongsToMany('App\User');
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'sauce_likes', 'sauce_id', 'user_id');
+    }
+
+    public function dislikes()
+    {
+        return $this->belongsToMany(User::class, 'sauce_dislikes', 'sauce_id', 'user_id');
     }
 }
