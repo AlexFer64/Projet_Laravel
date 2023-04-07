@@ -22,3 +22,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\SauceController::class, 'index'])->name('welcome');
 Route::get('/sauces/{id}', [App\Http\Controllers\SauceController::class, 'show'])->name('sauces.show');
+Route::get('/create', [App\Http\Controllers\SauceController::class, 'create'])->name('sauces.create');
+Route::post('/store', [App\Http\Controllers\SauceController::class, 'store'])->name('sauces.store');

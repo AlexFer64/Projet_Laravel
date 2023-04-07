@@ -9,7 +9,7 @@ class Sauce extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['userId', 'name', 'manufacturer', 'description', 'mainPepper', 'imageUrl', 'heat', 'likes', 'dislikes'];
+    protected $fillable = ['userId', 'name', 'manufacturer', 'description', 'main_pepper', 'image_url', 'heat', 'likes', 'dislikes'];
 
     public function user()
     {
