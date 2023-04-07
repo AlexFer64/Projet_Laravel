@@ -1,0 +1,44 @@
+/* Ajoutez du style pour le titre de la sauce */
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Ajoutez du style pour l'image de la sauce */
+  img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  /* Ajoutez du style pour la description de la sauce */
+  p {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  /* Ajoutez du style pour les boutons "Like" et "Dislike" */
+  .btn-like, .btn-dislike {
+    display: inline-block;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: #666;
+    margin-right: 10px;
+  }
+  
+  .btn-like:hover, .btn-dislike:hover {
+    color: #333;
+  }
+  
+  .btn-like i, .btn-dislike i {
+    margin-right: 5px;
+  }
+  

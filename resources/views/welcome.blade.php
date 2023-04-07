@@ -17,6 +17,7 @@
                     <p>{{ $sauce->heat }}</p>
                     <p>{{ $sauce->likes }}</p>
                     <p>{{ $sauce->dislikes }}</p>
+                    <a href="{{ route('sauces.show', ['id' => $sauce->id]) }}">Voir les détails</a>
                 </div>
             @endforeach
             </section>

@@ -14,4 +14,11 @@ class SauceController extends Controller
         return view('welcome',compact('sauces'));
         
     }
+
+    public function show($id)
+    {
+        $sauce = Sauce::findOrFail($id);
+        return view('sauces.show', compact('sauce'));
+    }
+    
 }
