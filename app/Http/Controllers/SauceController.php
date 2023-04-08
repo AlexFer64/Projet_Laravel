@@ -43,5 +43,36 @@ class SauceController extends Controller
         return redirect()->route('welcome')->with('success','Sauce ajoutée avec succès');
         
     }
+
+    public function edit($id){
+        $sauce = Sauce::findOrFail($id);
+        return view('sauces.edit', compact('sauce'));
+    }
+
+    public function update(Request $request, $id){
+        $request->validate([
+            'name' => 'required',
+            'manufacturer' => 'required',
+            'description' => 'required',
+            'main_pepper' => 'required',
+            'image_url' => 'required',
+            'heat' => 'required',
+        ]);
+        
+        $sauce = Sauce::findOrFail($id);
+        $sauce->update($request->all());
     
+        return redirect()->route('welcome')->with('success','Sauce modifiée avec succès');
+    }
+    
+
+    public function destroy($id)
+    {
+        $sauce = Sauce::findOrFail($id);
+        $sauce->delete();
+
+        return redirect()->route('welcome')->with('success','Sauce supprimée avec succès');
+    }
+    
+
 }

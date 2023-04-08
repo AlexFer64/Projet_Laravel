@@ -70,6 +70,10 @@
                                     </form>
                                 </div>
                             </li>
+
+                            <li>
+                                <a href="{{ route('sauces.create') }}" class="btn btn-primary">Ajouter une sauce</a>
+                            </li>
                         @endguest
                     </ul>
                 </div>
