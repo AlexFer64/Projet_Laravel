@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Sauce;
+use Illuminate\Support\Facades\Auth;
+
 
 class SauceController extends Controller
 {
@@ -11,7 +13,20 @@ class SauceController extends Controller
     {
 
         $sauces = Sauce::all();
-        return view('welcome',compact('sauces'));
+        $ratio= [];
+        foreach ($sauces as $sauce) {
+            if($sauce->likes == 0 && $sauce->dislikes == 0)  {
+                $ratio[$sauce->id] = "Aucune";
+
+            } 
+            elseif($sauce->likes == 0 && $sauce->dislikes != 0){
+                $ratio[$sauce->id] = 0;
+            }
+            else{
+                $ratio[$sauce->id] = round(($sauce->likes / ($sauce->likes + $sauce->dislikes) * 100), 0);
+            }
+        }
+        return view('welcome',compact('sauces', 'ratio'));
         
     }
 
@@ -74,5 +89,56 @@ class SauceController extends Controller
         return redirect()->route('welcome')->with('success','Sauce supprimée avec succès');
     }
     
+    public function like($id){
+        $sauce = Sauce::findOrFail($id);
+        $user = Auth::user();
+        if($sauce->likes()->where('user_id', $user->id)->exists()) {
+            $sauce->likes = $sauce->likes - 1;
+            $sauce->likes()->detach($user->id);
+            $sauce->save();
+            return redirect()->route("sauces.show", $id);
+        } 
+        elseif($sauce->dislikes()->where('user_id', $user->id)->exists()) {
+            $sauce->dislikes()->detach($user->id);
+            $sauce->dislikes = $sauce->dislikes - 1;
+            $sauce->likes()->attach($user->id);
+            $sauce->likes = $sauce->likes + 1;
+            $sauce->save();
+            return redirect()->route("sauces.show", $id);
+        }
+        else {
+            $sauce->likes = $sauce->likes + 1;
+            $sauce->likes()->attach($user->id);
+            $sauce->save();
+            return redirect()->route("sauces.show", $id);
+        }
+       
+     
+    }
+
+    public function dislike($id){
+        $sauce = Sauce::findOrFail($id);
+        $user = Auth::user();
+        if($sauce->dislikes()->where('user_id', $user->id)->exists()) {
+            $sauce->dislikes = $sauce->dislikes - 1;
+            $sauce->dislikes()->detach($user->id);
+            $sauce->save();
+            return redirect()->route("sauces.show", $id);
+        } 
+        elseif($sauce->likes()->where('user_id', $user->id)->exists()) {
+            $sauce->likes()->detach($user->id);
+            $sauce->likes = $sauce->likes - 1;
+            $sauce->dislikes()->attach($user->id);
+            $sauce->dislikes = $sauce->dislikes + 1;
+            $sauce->save();
+            return redirect()->route("sauces.show", $id);
+        }
+        else {
+            $sauce->dislikes = $sauce->dislikes + 1;
+            $sauce->dislikes()->attach($user->id);
+            $sauce->save();
+            return redirect()->route("sauces.show", $id);
+        }
+    }
 
 }

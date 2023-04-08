@@ -27,4 +27,6 @@ Route::post('/store', [App\Http\Controllers\SauceController::class, 'store'])->n
 Route::delete('/sauces/{id}', [App\Http\Controllers\SauceController::class, 'destroy'])->name('sauces.destroy');
 Route::get('/edit/{id}', [App\Http\Controllers\SauceController::class, 'edit'])->name('sauces.edit');
 Route::put('/update/{id}', [App\Http\Controllers\SauceController::class, 'update'])->name('sauces.update');
+Route::get('/like/{id}', [App\Http\Controllers\SauceController::class, 'like'])->name('sauces.like');
+Route::get('/dislike/{id}', [App\Http\Controllers\SauceController::class, 'dislike'])->name('sauces.dislike');
 

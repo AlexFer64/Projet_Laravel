@@ -12,6 +12,7 @@
                      <img src="{{ $sauce->image_url }}">
                     <h2>{{ $sauce->name }}</h2>
                     <p>Heat : {{ $sauce->heat }} /10</p>
+                    <p>Appréciation : {{ $ratio[$sauce->id] }} @if($ratio[$sauce->id] != "Aucune" ) % @endif</p>
                     <a href="{{ route('sauces.show', ['id' => $sauce->id]) }}">Voir les détails</a>
                 </div>
             @endforeach

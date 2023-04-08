@@ -15,8 +15,8 @@ class SauceLikeUsers extends Migration
     {
         Schema::create('sauce_likes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('sauce_id')->constrained();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('sauce_id')->constrained('sauces')->onDelete('cascade');
             $table->timestamps();
         });
     }

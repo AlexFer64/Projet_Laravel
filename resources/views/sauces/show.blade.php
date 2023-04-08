@@ -11,14 +11,26 @@
     <p>Likes: {{ $sauce->likes }}</p>
     <p>Dislikes: {{ $sauce->dislikes }}</p>
     <p>Manufacturer: {{ $sauce->manufacturer }}</p>
-    <button class="btn-like"></button>
-    <button class="btn-dislike"></button>
-    @if(Auth::user()->id == $sauce->user_id)
-        <a href="{{ route('sauces.edit', ['id' => $sauce->id]) }}">Modifier la sauce</a>
-        <form action="{{ route('sauces.destroy', ['id' => $sauce->id]) }}" method="POST">
+    @if(Auth::check())
+        <form action="{{ route('sauces.like', ['id' => $sauce->id]) }}" method="POST">
             @csrf
-            @method('DELETE')
-            <button type="submit">Supprimer la sauce</button>
+            @method('GET')
+            <button>Like</button>
         </form>
+            
+        <form action="{{ route('sauces.dislike', ['id' => $sauce->id]) }}" method="POST">
+            @csrf
+            @method('GET')
+            <button>Dislike</button>
+        </form>
+    
+        @if(Auth::user()->id == $sauce->user_id )
+            <a href="{{ route('sauces.edit', ['id' => $sauce->id]) }}">Modifier la sauce</a>
+            <form action="{{ route('sauces.destroy', ['id' => $sauce->id]) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit">Supprimer la sauce</button>
+            </form>
+        @endif
     @endif
 @endsection
