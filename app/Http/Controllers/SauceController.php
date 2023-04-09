@@ -26,7 +26,7 @@ class SauceController extends Controller
                 $ratio[$sauce->id] = round(($sauce->likes / ($sauce->likes + $sauce->dislikes) * 100), 0);
             }
         }
-        return view('welcome',compact('sauces', 'ratio'));
+        return view('sauces.index',compact('sauces', 'ratio'));
         
     }
 
@@ -55,7 +55,7 @@ class SauceController extends Controller
         $sauce->user_id = auth()->user()->id;
         $sauce->save();
 
-        return redirect()->route('welcome')->with('success','Sauce ajoutée avec succès');
+        return redirect()->route('sauces.index')->with('success','Sauce ajoutée avec succès');
         
     }
 
@@ -77,7 +77,7 @@ class SauceController extends Controller
         $sauce = Sauce::findOrFail($id);
         $sauce->update($request->all());
     
-        return redirect()->route('welcome')->with('success','Sauce modifiée avec succès');
+        return redirect()->route('sauces.index')->with('success','Sauce modifiée avec succès');
     }
     
 
@@ -86,7 +86,7 @@ class SauceController extends Controller
         $sauce = Sauce::findOrFail($id);
         $sauce->delete();
 
-        return redirect()->route('welcome')->with('success','Sauce supprimée avec succès');
+        return redirect()->route('sauces.index')->with('success','Sauce supprimée avec succès');
     }
     
     public function like($id){

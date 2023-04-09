@@ -13,6 +13,7 @@
             <div class="col-md-4">
               <img src="{{ $sauce->image_url }}" alt="{{ $sauce->name }}" style="max-width:100%;">
               <div style="display: flex; justify-content: center; margin-top: 10px;">
+              @if(Auth::check())
                 <form action="{{ route('sauces.like', ['id' => $sauce->id]) }}" method="POST">
                   @csrf
                   @method('GET')
@@ -27,6 +28,7 @@
                     <i class="fa fa-thumbs-down" aria-hidden="true"></i>
                   </button>
                 </form>
+                @endif
               </div>
             </div>
             <div class="col-md-8">
