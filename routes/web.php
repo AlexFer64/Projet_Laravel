@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SauceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,4 +30,5 @@ Route::get('/edit/{id}', [App\Http\Controllers\SauceController::class, 'edit'])-
 Route::put('/update/{id}', [App\Http\Controllers\SauceController::class, 'update'])->name('sauces.update');
 Route::get('/like/{id}', [App\Http\Controllers\SauceController::class, 'like'])->name('sauces.like');
 Route::get('/dislike/{id}', [App\Http\Controllers\SauceController::class, 'dislike'])->name('sauces.dislike');
+
 

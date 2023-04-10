@@ -56,7 +56,7 @@ class SauceController extends Controller
         $sauce->save();
 
         return redirect()->route('sauces.index')->with('success','Sauce ajoutée avec succès');
-        
+           
     }
 
     public function edit($id){
@@ -76,7 +76,7 @@ class SauceController extends Controller
         
         $sauce = Sauce::findOrFail($id);
         $sauce->update($request->all());
-    
+
         return redirect()->route('sauces.index')->with('success','Sauce modifiée avec succès');
     }
     
